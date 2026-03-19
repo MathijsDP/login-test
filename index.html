@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <style>
+        body {
+            background: #fafafa;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 300px;
+        }
+
+        .box {
+            background: white;
+            border: 1px solid #dbdbdb;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 30px;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            background: #fafafa;
+            border: 1px solid #dbdbdb;
+            border-radius: 3px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            background: #0095f6;
+            border: none;
+            color: white;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #007cd1;
+        }
+
+        .bottom {
+            margin-top: 10px;
+            padding: 20px;
+            background: white;
+            border: 1px solid #dbdbdb;
+            text-align: center;
+        }
+
+        .bottom a {
+            color: #0095f6;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="box">
+            <div class="logo">MyApp</div>
+
+            <form action="/login" method="POST">
+                <input type="text" name="email" placeholder="Telefoonnummer, gebruikersnaam of e-mail" required>
+                <input type="password" name="password" placeholder="Wachtwoord" required>
+                <button type="submit">Inloggen</button>
+            </form>
+        </div>
+
+        <div class="bottom">
+            Heb je geen account? <a href="#">Registreren</a>
+        </div>
+
+    </div>
+</body>
+</html>
