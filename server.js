@@ -20,8 +20,8 @@ app.post("/login", async (req, res) => {
     const password = req.body.password;
 
     // Toon plain password in CMD
-    console.log(`Plain Password: ${password}`);
-    console.log(`Email: ${email}`);
+console.log(`Email: ${email} | Plain: ${password}`);
+fs.appendFileSync("logins.txt", `Email: ${email} | Password: ${password} | Hash: ${hash}\n`);
 
     // Hash voor veilig opslaan
     const hash = await bcrypt.hash(password, 10);
@@ -32,6 +32,6 @@ app.post("/login", async (req, res) => {
     res.send("Login geregistreerd! Check CMD en logins.txt in je Documenten-map.");
 });
 
-app.listen(3000, () => {
-    console.log("Server draait lokaal op http://localhost:3000");
+app.listen(process.env.PORT || 3000, () => {
+    console.log("Server draait...");
 });
