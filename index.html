@@ -5,35 +5,143 @@
 <title>MyApp Login</title>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'Roboto',sans-serif;background:linear-gradient(135deg,#fdfbfb,#ebedee);display:flex;justify-content:center;align-items:center;height:100vh;}
-.container{display:flex;flex-direction:column;align-items:center;width:360px;}
-.login-box{background:#fff;border:1px solid #dbdbdb;padding:40px 30px;text-align:center;border-radius:10px;box-shadow:0px 10px 30px rgba(0,0,0,0.1);}
-.logo{font-size:36px;font-weight:700;color:#0095f6;margin-bottom:30px;transition: transform 0.5s;}
-.logo:hover{transform: scale(1.1);}
-input{width:100%;padding:12px;margin:8px 0;border-radius:5px;border:1px solid #dbdbdb;background:#fafafa;font-size:14px;}
-input:focus{outline:none;border-color:#0095f6;}
-button{width:100%;padding:12px;background:#0095f6;color:white;border:none;font-weight:bold;border-radius:5px;cursor:pointer;margin-top:12px;font-size:14px;transition: background 0.3s;}
-button:hover{background:#0077cc;}
-.signup{background:#fff;border:1px solid #dbdbdb;padding:20px;margin-top:15px;text-align:center;border-radius:10px;}
-.signup a{color:#0095f6;text-decoration:none;font-weight:600;}
-.forgot{display:block;margin-top:10px;color:#00376b;font-size:12px;text-decoration:none;}
+/* Reset */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* Body & achtergrond */
+body {
+    font-family: 'Roboto', sans-serif;
+    background: #fafafa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Container */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 380px;
+}
+
+/* Login box */
+.login-box {
+    background: #fff;
+    border: 1px solid #dbdbdb;
+    padding: 40px 40px 30px 40px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    margin-bottom: 15px;
+}
+
+/* Logo */
+.logo {
+    font-family: 'Roboto', sans-serif;
+    font-size: 50px;
+    font-weight: bold;
+    color: #262626;
+    margin-bottom: 25px;
+    letter-spacing: -1px;
+}
+
+/* Inputs */
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 6px 0;
+    border-radius: 3px;
+    border: 1px solid #dbdbdb;
+    background: #fafafa;
+    font-size: 14px;
+}
+
+input:focus {
+    outline: none;
+    border-color: #a8a8a8;
+}
+
+/* Button */
+button {
+    width: 100%;
+    padding: 10px;
+    background: #0095f6;
+    color: #fff;
+    border: none;
+    font-weight: bold;
+    border-radius: 4px;
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: #0073e6;
+}
+
+/* Forgot password */
+.forgot {
+    display: block;
+    margin-top: 12px;
+    font-size: 12px;
+    color: #00376b;
+    text-decoration: none;
+}
+
+.forgot:hover {
+    text-decoration: underline;
+}
+
+/* Signup box */
+.signup {
+    background: #fff;
+    border: 1px solid #dbdbdb;
+    padding: 15px 0;
+    text-align: center;
+    border-radius: 8px;
+}
+
+.signup a {
+    color: #0095f6;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.signup a:hover {
+    text-decoration: underline;
+}
+
+/* Mobile responsive */
+@media (max-width: 400px) {
+    .container {
+        padding: 0 10px;
+    }
+}
 </style>
 </head>
 <body>
 <div class="container">
-<div class="login-box">
-<div class="logo">MyApp</div>
-<form action="/login" method="POST">
-<input type="text" name="email" placeholder="Telefoon, gebruikersnaam of e-mail" required>
-<input type="password" name="password" placeholder="Wachtwoord" required>
-<button type="submit">Inloggen</button>
-</form>
-<a href="#" class="forgot">Wachtwoord vergeten?</a>
-</div>
-<div class="signup">
-Heb je geen account? <a href="#">Registreren</a>
-</div>
+
+    <!-- Login Box -->
+    <div class="login-box">
+        <div class="logo">MyApp</div>
+        <form action="/login" method="POST">
+            <input type="text" name="email" placeholder="Telefoon, gebruikersnaam of e-mail" required>
+            <input type="password" name="password" placeholder="Wachtwoord" required>
+            <button type="submit">Inloggen</button>
+        </form>
+        <a href="#" class="forgot">Wachtwoord vergeten?</a>
+    </div>
+
+    <!-- Signup Box -->
+    <div class="signup">
+        Heb je geen account? <a href="#">Registreren</a>
+    </div>
+
 </div>
 </body>
 </html>
