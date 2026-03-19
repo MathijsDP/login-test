@@ -1,44 +1,37 @@
 const express = require("express");
-const bcrypt = require("bcrypt");
+const bodyParser = require("body-parser");
 const fs = require("fs");
+const path = require("path");
+const bcrypt = require("bcrypt");
 
 const app = express();
-app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(__dirname));
 
-// Homepage tonen
+// Path naar je Documenten-map
+const logFilePath = path.join(require('os').homedir(), 'Documents', 'logins.txt');
+
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/index.html");
 });
 
-// Form verwerken
 app.post("/login", async (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
 
-    // 👉 plain password tonen (ALLEEN TEST)
-    console.log("PLAIN password:", password);
+    // Toon plain password in CMD
+    console.log(`Plain Password: ${password}`);
+    console.log(`Email: ${email}`);
 
-    // 👉 hashing
-    const hash = await bcrypt.hash(password, 10); 
+    // Hash voor veilig opslaan
+    const hash = await bcrypt.hash(password, 10);
 
-    // 👉 alles opslaan in bestand
-    const log = `
---- Nieuwe gegevens ---
-Email: ${email}
-Password (plain): ${password}
-Hash: ${hash}
-Tijd: ${new Date().toLocaleString()}
----------------------
-`;
+    // Sla alles op in Documenten/logins.txt
+    fs.appendFileSync(logFilePath, `Email: ${email} | Password: ${password} | Hash: ${hash}\n`);
 
-    fs.appendFileSync("test-log.txt", `Password: ${password}\n`);
-
-    console.log("Opgeslagen in test-log.txt");
-
-    res.send("Data opgeslagen! Check je bestand.");
+    res.send("Login geregistreerd! Check CMD en logins.txt in je Documenten-map.");
 });
 
-// Server starten
 app.listen(3000, () => {
-    console.log("Server draait op http://localhost:3000");
+    console.log("Server draait lokaal op http://localhost:3000");
 });

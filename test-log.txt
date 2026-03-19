@@ -1,8 +1,0 @@
-
---- NIEUWE INPUT ---
-Email: mathijs@gmail.com
-Password (plain): testtest
-Hash: $2b$10$DiLBs7dikVLTIzH1zkKyseZHfUd0UyumPuyu6ONMAD0HIp/CNfPo.
-Tijd: 19/3/2026, 09:16:04
----------------------
-Password: ja toch
